@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El e-book de un avalúo inmobiliario | Miguel Camacaro Pérez</title>
+  <meta name="description" content="Landing page oficial y lectura online del libro 'El e-book de un avalúo inmobiliario' por el Ing. Miguel Camacaro Pérez y el Arq. Ernesto Mock Díaz. Miguel Camacaro Ediciones.">
+  
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- PDF.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #070c18;
+      --bg-card: #0f172a;
+      --border-card: rgba(255, 255, 255, 0.12);
+      --royal-blue: #1d4ed8;
+      --royal-gold: #d97706;
+      --accent-gold: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-title: 'Cinzel', serif;
+      --font-reading: 'Literata', Georgia, serif;
+      --font-ui: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Barra Superior */
+    header {
+      background: rgba(7, 12, 24, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 0.75rem 0;
+    }
+
+    .nav-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .logo-container {
+      background: #ffffff;
+      padding: 4px 8px;
+      border-radius: 8px;
+      border: 2px solid var(--accent-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .brand-logo img {
+      height: 64px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-text .name {
+      font-family: var(--font-title);
+      font-weight: 900;
+      font-size: 1.2rem;
+      letter-spacing: 1.5px;
+      color: var(--accent-gold);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .brand-text .sub {
+      font-size: 0.8rem;
+      color: #e2e8f0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-gold);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--royal-gold), var(--accent-gold));
+      color: #000;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.45);
+    }
+
+    .btn-donate {
+      background: linear-gradient(135deg, #0070ba, #003087);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(0, 112, 186, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-donate:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 112, 186, 0.55);
+      background: linear-gradient(135deg, #0079c1, #0045ac);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      border: 1px solid var(--border-card);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--accent-gold);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 4rem 0 3.5rem;
+      background: radial-gradient(circle at 50% 10%, #172554 0%, #070c18 80%);
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .badge-editorial {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.1rem, 4.2vw, 3.2rem);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+      color: #ffffff;
+    }
+
+    .hero-title span {
+      color: var(--accent-gold);
+    }
+
+    .hero-lead {
+      font-family: var(--font-reading);
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Tarjeta Portada Hero */
+    .book-cover-card {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(29, 78, 216, 0.25);
+    }
+
+    .book-cover-card img.cover-art {
+      width: 100%;
+      max-width: 270px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      margin-bottom: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .book-cover-card img.cover-art:hover {
+      transform: scale(1.02);
+    }
+
+    .metadata-strip {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
+    .metadata-strip strong {
+      color: #e2e8f0;
+    }
+
+    /* Secciones de Contenido */
+    .section-block {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-head h2 {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-head p {
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Ficha del Autor */
+    .author-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .author-photo-frame {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 3px solid var(--accent-gold);
+      padding: 6px;
+      margin: 0 auto;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1e293b;
+    }
+
+    .author-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%; /* Centrado facial */
+      border-radius: 50%;
+      display: block;
+    }
+
+    .author-info h3 {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 0.3rem;
+    }
+
+    .author-info .degree {
+      color: #60a5fa;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .author-bio {
+      font-family: var(--font-reading);
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .dedication-box {
+      background: rgba(255, 255, 255, 0.03);
+      border-left: 3px solid var(--royal-gold);
+      padding: 0.8rem 1.2rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Reseña & Prólogo */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .review-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .review-text {
+      font-family: var(--font-reading);
+      font-size: 1.05rem;
+      color: #e2e8f0;
+      font-style: italic;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .review-author .name {
+      font-weight: 700;
+      color: var(--accent-gold);
+      font-size: 0.95rem;
+    }
+
+    .review-author .role {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Grilla de Capítulos / Índice */
+    .fabulas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .fabula-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .fabula-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-gold);
+      box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.2);
+    }
+
+    .fabula-card .f-num {
+      font-family: var(--font-title);
+      font-size: 0.85rem;
+      color: var(--accent-gold);
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .fabula-card h4 {
+      font-size: 1.15rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .fabula-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
+    }
+
+    .fabula-card .f-btn {
+      color: #60a5fa;
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* Visor de Lectura Online (Reader) */
+    .reader-section {
+      padding: 3rem 0 5rem;
+      background: #050811;
+    }
+
+    .reader-frame {
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      position: relative;
+    }
+
+    .reader-toolbar {
+      background: #070c18;
+      padding: 0.75rem 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .reader-controls-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .zoom-label {
+      font-weight: 700;
+      color: var(--accent-gold);
+      font-size: 0.85rem;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .reader-stage {
+      flex: 1;
+      background: #0b0f19;
+      overflow: auto;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      position: relative;
+      padding: 1.5rem;
+    }
+
+    .book-spread {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.85);
+      background: #ffffff;
+      border-radius: 4px;
+      position: relative;
+      margin: auto;
+    }
+
+    /* Pliegue central de lomo */
+    .book-spread.double-mode::after {
+      content: "";
+      position: absolute;
+      top: 0; bottom: 0; left: 50%;
+      width: 14px;
+      transform: translateX(-50%);
+      background: linear-gradient(to right, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.45) 45%, rgba(255,255,255,0.08) 50%, rgba(0,0,0,0.45) 55%, rgba(0,0,0,0.2) 100%);
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .page-canvas {
+      display: block;
+      width: auto;
+      height: auto;
+    }
+
+    .reader-footer {
+      background: #070c18;
+      padding: 0.75rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Overlay de Carga */
+    .reader-loader {
+      position: absolute;
+      inset: 0;
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+      transition: opacity 0.3s ease;
+    }
+
+    .spinner {
+      width: 45px;
+      height: 45px;
+      border: 3px solid rgba(255,255,255,0.1);
+      border-top-color: var(--accent-gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Footer General */
+    footer {
+      border-top: 1px solid var(--border-card);
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      background: var(--bg-dark);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .author-card, .reviews-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .author-photo-frame { margin-bottom: 1.5rem; }
+      .book-spread::after, #canvas-r { display: none !important; }
+      .hero-btns { justify-content: center; }
+      .nav-links { display: none; }
+      .reader-frame { height: 80vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Encabezado con Logotipo Agrandado y Botón Donar -->
+  <header>
+    <div class="container nav-wrap">
+      <a href="#" class="brand-logo">
+        <div class="logo-container">
+          <img 
+            src="LogoMCE_5.png" 
+            alt="Miguel Camacaro Ediciones" 
+            onerror="this.onerror=null; this.src='LogoMCE.png';">
+        </div>
+        <div class="brand-text">
+          <span class="name">MIGUEL CAMACARO</span>
+          <span class="sub">EDICIONES • LIBROS PREMIUM</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#obra">La Obra</a>
+        <a href="#autor">El Autor</a>
+        <a href="#capitulos">Estructura & Capítulos</a>
+        <a href="#lector" class="btn btn-gold">📖 Leer Online</a>
+        <a href="https://paypal.me/spilimcurso" target="_blank" rel="noopener noreferrer" class="btn btn-donate">
+          ☕ Donar
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge-editorial">Manual Técnico & Econometría Aplicada</span>
+          <h1 class="hero-title">El e-book de un <span>avalúo inmobiliario</span></h1>
+          <p class="hero-lead">
+            Una guía completa, práctica y rigurosa para la homologación de criterios y el modelado econométrico de precios inmobiliarios. Fundamentos de inferencia estadística, normas internacionales (IVS, ABNT NBR 14653 e IPMS) y auditoría de informes valuatorios.
+          </p>
+          <div class="hero-btns">
+            <a href="#lector" class="btn btn-gold">Comenzar Lectura Online</a>
+            <a href="https://paypal.me/spilimcurso" target="_blank" rel="noopener noreferrer" class="btn btn-donate">Contribuir / Donar</a>
+            <a href="#obra" class="btn btn-outline">Ver Presentación</a>
+          </div>
+        </div>
+
+        <div class="book-cover-card">
+          <img src="Español.png" alt="Portada El e-book de un avalúo inmobiliario" class="cover-art">
+          <div class="metadata-strip">
+            <div><strong>Autor:</strong> Miguel Camacaro Pérez[cite: 6]</div>
+            <div><strong>Colaborador:</strong> Ernesto Mock Díaz[cite: 6]</div>
+            <div><strong>ISBN:</strong> 978-980-18-2058-1[cite: 6]</div>
+            <div><strong>Depósito Legal:</strong> LA2021000259[cite: 6]</div>
+            <div><strong>Editorial:</strong> MC Ediciones[cite: 6]</div>
+            <div><strong>Normativa:</strong> IVS / NBR 14653 / IPMS[cite: 6]</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reseña y Presentación -->
+    <section class="section-block" id="obra">
+      <div class="container">
+        <div class="section-head">
+          <h2>Presentación y Fundamentos</h2>
+          <p>La consolidación de la metodología científica y el tratamiento estadístico en la valuación panamericana[cite: 6].</p>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-box">
+            <p class="review-text">
+              «El material presentado por el ingeniero Miguel Camacaro sin lugar a dudas llena este vacío. Abordando el tema con una didáctica depurada, sin descuidar el rigor técnico requerido para el trabajo, desarrolla magistralmente el contenido, llevando al profesional a un recorrido que comienza con el análisis de la documentación... hasta la fundamentación y precisión en la elaboración del informe»[cite: 6].
+            </p>
+            <div class="review-author">
+              <div>
+                <div class="name">Antônio Pelli Neto[cite: 6]</div>
+                <div class="role">CEO Pelli Sistemas Engenharia (Brasil)[cite: 6]</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-box">
+            <p class="review-text">
+              «Hoy se presenta un reto enorme para los tasadores, vista la creciente industria de valuaciones automatizadas que procesan grandes bases de datos. Por esta razón, los tasadores deben prepararse y actualizarse para fortalecer su conocimiento y poder interpretar los resultados estadísticos de esos modelos que fundamentan los estudios de mercado»[cite: 6].
+            </p>
+            <div class="review-author">
+              <div>
+                <div class="name">Ing. Miguel Camacaro Pérez, M.Sc.[cite: 6]</div>
+                <div class="role">Autor y Director de Miguel Camacaro Ediciones[cite: 6]</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre el Autor -->
+    <section class="section-block" id="autor">
+      <div class="container">
+        <div class="author-card">
+          <div class="author-photo-frame">
+            <img 
+              src="Informal 3.png" 
+              alt="Ing. Miguel Camacaro Pérez"
+              onerror="this.onerror=null; this.src='Imagen final_2.png'; this.onerror=function(){this.src='Miguel _Camacaro.jpeg.png';};">
+          </div>
+          <div class="author-info">
+            <h3>ING. MIGUEL CAMACARO PÉREZ, M.SC.[cite: 6]</h3>
+            <div class="degree">Ingeniero Civil – Tasador (ULA) • M.Sc. en Gerencia de Construcción (UCLA – University of Florida)[cite: 6]</div>
+            <p class="author-bio">
+              Especialista en valuación de activos y profesor universitario de estadística y econometría con más de 40 años de trayectoria profesional en la ingeniería de tasación[cite: 6]. Creador del canal <em>Mundo Valor</em> y fundador del <em>Appraisers Reading Club</em>, promueve la integración de la inferencia estadística, la Ciencia de Datos y el cumplimiento de normas internacionales de valuación y medición[cite: 6].
+            </p>
+            <div class="dedication-box">
+              <strong>In memoriam:</strong> A <em>Jesús Alí Camacaro Pérez</em> y <em>Sergio Antonio Abunahman</em>, mis dos grandes hermanos, y a todos los colegas tasadores víctimas del COVID-19[cite: 6].
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Índice de Capítulos con Mapeo Exacto en PDF -->
+    <section class="section-block" id="capitulos">
+      <div class="container">
+        <div class="section-head">
+          <h2>Estructura del Tratado</h2>
+          <p>Selecciona una sección técnica para abrir directamente el libro interactivo en la página correspondiente[cite: 6].</p>
+        </div>
+
+        <div class="fabulas-grid">
+          <!-- Mapeo exacto PDF: Pág 1 impresa = Pág 10 PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(10)">
+            <div>
+              <div class="f-num">PARTE NORMATIVA • PÁG. 1</div>
+              <h4>Normas de Valuación & Medición</h4>
+              <p>Marco conceptual de las NIV / IVS, normas generales, normas de activos y la evolución metodológica panamericana[cite: 6].</p>
+            </div>
+            <div class="f-btn">Leer sección ➔</div>
+          </div>
+
+          <!-- Mapeo exacto PDF: Pág 3 impresa = Pág 12 PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(12)">
+            <div>
+              <div class="f-num">ESTÁNDAR IVS • PÁG. 3</div>
+              <h4>NIV 101 a NIV 105</h4>
+              <p>Alcance del trabajo, investigaciones, bases de valor de mercado e implementación de los enfoques valuatorios[cite: 6].</p>
+            </div>
+            <div class="f-btn">Leer sección ➔</div>
+          </div>
+
+          <!-- Mapeo exacto PDF: Pág 18 impresa = Pág 27 PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(27)">
+            <div>
+              <div class="f-num">ESTÁNDAR ABNT • PÁG. 18</div>
+              <h4>NBR 14653 (Partes 1 y 2)</h4>
+              <p>Procedimientos generales, actividades básicas, especificidad en inmuebles urbanos y calificación de informes[cite: 6].</p>
+            </div>
+            <div class="f-btn">Leer sección ➔</div>
+          </div>
+
+          <!-- Mapeo exacto PDF: Pág 33 impresa = Pág 42 PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(42)">
+            <div>
+              <div class="f-num">MEDICIÓN IPMS • PÁG. 33</div>
+              <h4>Estándar IPMS: Residencial 3A</h4>
+              <p>Criterios de medición en unidades multifamiliares en condominio, áreas privadas y áreas comunes[cite: 6].</p>
+            </div>
+            <div class="f-btn">Leer sección ➔</div>
+          </div>
+
+          <!-- Mapeo exacto PDF: Pág 56 impresa = Pág 65 PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(65)">
+            <div>
+              <div class="f-num">INFORME MODELO • PÁG. 56</div>
+              <h4>Secciones A, B, C y D</h4>
+              <p>Estructuración formal del informe técnico: información general, localización, aspectos legales y físicos[cite: 6].</p>
+            </div>
+            <div class="f-btn">Leer sección ➔</div>
+          </div>
+
+          <!-- Mapeo exacto PDF: Pág 80 impresa = Pág 89 PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(89)">
+            <div>
+              <div class="f-num">METODOLOGÍA • PÁG. 80</div>
+              <h4>Procedimiento del Avalúo</h4>
+              <p>Inspección técnica, recopilación de datos, diagnóstico de mercado y selección del método comparativo[cite: 6].</p>
+            </div>
+            <div class="f-btn">Leer sección ➔</div>
+          </div>
+
+          <!-- Mapeo exacto PDF: Pág 104 impresa = Pág 113 PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(113)">
+            <div>
+              <div class="f-num">ECONOMETRÍA • PÁG. 104</div>
+              <h4>Tratamiento Científico & MRLM</h4>
+              <p>Modelado de precios hedónicos, verificación de supuestos de Gauss-Markov y análisis de especificación[cite: 6].</p>
+            </div>
+            <div class="f-btn">Leer sección ➔</div>
+          </div>
+
+          <!-- Mapeo exacto PDF: Pág 179 impresa = Pág 188 PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(188)">
+            <div>
+              <div class="f-num">RESULTADOS • PÁG. 179</div>
+              <h4>Interpretación & Calificación</h4>
+              <p>Funciones de estimación, intervalos de confianza admisibles y encuadramiento en Grados III de Fundamentación y Precisión[cite: 6].</p>
+            </div>
+            <div class="f-btn">Leer sección ➔</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visor de Lectura Digital Ampliado -->
+    <section class="reader-section" id="lector">
+      <div class="container">
+        <div class="reader-frame" id="reader-box">
+          <!-- Loader -->
+          <div class="reader-loader" id="loader">
+            <div class="spinner"></div>
+            <p style="color:var(--accent-gold); font-family:var(--font-title); font-size:1.1rem;">Cargando tratado digital...</p>
+          </div>
+
+          <!-- Toolbar -->
+          <div class="reader-toolbar">
+            <div style="font-weight:700; color:#fff; font-size:0.95rem;">
+              📖 <span id="doc-title">El e-book de un avalúo inmobiliario</span>[cite: 6]
+            </div>
+            <div class="reader-controls-group">
+              <button class="btn btn-outline" style="padding:0.4rem 0.8rem;" onclick="toggleViewMode()" id="view-mode-btn">📄 Página Simple</button>
+              <button class="btn btn-outline" style="padding:0.4rem 0.8rem;" onclick="zoom(-0.15)">🔍 -</button>
+              <span class="zoom-label" id="zoom-text">140%</span>
+              <button class="btn btn-outline" style="padding:0.4rem 0.8rem;" onclick="zoom(0.15)">🔍 +</button>
+              <button class="btn btn-outline" style="padding:0.4rem 0.8rem;" onclick="toggleFullscreen()">⛶ Pantalla Completa</button>
+            </div>
+          </div>
+
+          <!-- Stage con Scroll de Gran Formato -->
+          <div class="reader-stage" id="reader-viewport">
+            <div class="book-spread double-mode" id="spread-box">
+              <canvas id="canvas-l" class="page-canvas"></canvas>
+              <canvas id="canvas-r" class="page-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Footer Toolbar -->
+          <div class="reader-footer">
+            <button class="btn btn-outline" id="prev-btn" onclick="prevSpread()">◀ Anterior</button>
+            <div style="color:var(--accent-gold); font-weight:700; font-size:0.95rem;" id="page-num-indicator">
+              Cargando páginas...
+            </div>
+            <button class="btn btn-gold" id="next-btn" onclick="nextSpread()">Siguiente ▶</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p><strong>El e-book de un avalúo inmobiliario</strong> — © 2021 Miguel Camacaro Pérez & Ernesto Mock Díaz[cite: 6]</p>
+      <p style="margin-top:0.4rem; opacity:0.7;">Publicación técnica por <strong>Miguel Camacaro Ediciones</strong> • Todos los derechos reservados[cite: 6].</p>
+    </div>
+  </footer>
+
+  <script>
+    // Configuración de PDF.js
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    const pdfUrl = 'MCEMebook2022español.pdf';
+
+    let pdfDoc = null;
+    let currentLeftPage = 1;
+    let currentScale = 1.40;
+    let isSinglePageMode = false;
+    let isRendering = false;
+
+    // Cargar Documento
+    pdfjsLib.getDocument(pdfUrl).promise.then(pdf => {
+      pdfDoc = pdf;
+      document.getElementById('loader').style.opacity = '0';
+      setTimeout(() => document.getElementById('loader').style.display = 'none', 300);
+      renderSpread(currentLeftPage);
+    }).catch(err => {
+      console.error("Error al cargar PDF:", err);
+      document.getElementById('loader').innerHTML = `
+        <p style="color:#ef4444; font-weight:700;">No se pudo cargar el archivo PDF.</p>
+        <p style="color:#94a3b8; font-size:0.85rem; margin-top:0.4rem;">Verifique que el archivo <strong>MCEMebook2022español.pdf</strong> esté en la raíz del repositorio.</p>
+      `;
+    });
+
+    // Renderizar Página Individual con soporte HD
+    function renderPage(pageNum, canvasId) {
+      return new Promise((resolve) => {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext('2d');
+
+        if (!pdfDoc || pageNum > pdfDoc.numPages || pageNum < 1) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          canvas.style.display = 'none';
+          resolve();
+          return;
+        }
+
+        canvas.style.display = 'block';
+        pdfDoc.getPage(pageNum).then(page => {
+          const viewport = page.getViewport({ scale: currentScale });
+          
+          const outputScale = window.devicePixelRatio || 1;
+          canvas.width = Math.floor(viewport.width * outputScale);
+          canvas.height = Math.floor(viewport.height * outputScale);
+          canvas.style.width = Math.floor(viewport.width) + "px";
+          canvas.style.height = Math.floor(viewport.height) + "px";
+
+          const transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
+
+          const renderContext = {
+            canvasContext: ctx,
+            transform: transform,
+            viewport: viewport
+          };
+          page.render(renderContext).promise.then(() => resolve());
+        });
+      });
+    }
+
+    // Renderizar Pliego o Página Simple
+    function renderSpread(leftPage) {
+      if (!pdfDoc || isRendering) return;
+      isRendering = true;
+      const isMobile = window.innerWidth <= 900 || isSinglePageMode;
+      const spreadBox = document.getElementById('spread-box');
+
+      if (isMobile) {
+        spreadBox.classList.remove('double-mode');
+      } else {
+        spreadBox.classList.add('double-mode');
+      }
+
+      const p1 = renderPage(leftPage, 'canvas-l');
+      const p2 = !isMobile ? renderPage(leftPage + 1, 'canvas-r') : Promise.resolve();
+
+      Promise.all([p1, p2]).then(() => {
+        isRendering = false;
+        const rightPage = isMobile ? leftPage : Math.min(leftPage + 1, pdfDoc.numPages);
+
+        const displayLeft = leftPage > 9 ? `Pág. libro ${leftPage - 9}` : `Preliminar ${leftPage}`;
+        const displayRight = rightPage > 9 ? `Pág. libro ${rightPage - 9}` : `Preliminar ${rightPage}`;
+
+        document.getElementById('page-num-indicator').innerText = isMobile 
+          ? `${displayLeft} (PDF: ${leftPage} / ${pdfDoc.numPages})` 
+          : `${displayLeft} – ${displayRight} (PDF: ${leftPage}-${rightPage} / ${pdfDoc.numPages})`;
+
+        document.getElementById('prev-btn').disabled = leftPage <= 1;
+        document.getElementById('next-btn').disabled = isMobile 
+          ? leftPage >= pdfDoc.numPages 
+          : leftPage + 1 >= pdfDoc.numPages;
+
+        document.getElementById('zoom-text').innerText = Math.round(currentScale * 100) + '%';
+      });
+    }
+
+    function nextSpread() {
+      if (!pdfDoc || isRendering) return;
+      const step = (window.innerWidth <= 900 || isSinglePageMode) ? 1 : 2;
+      if (currentLeftPage + step <= pdfDoc.numPages) {
+        currentLeftPage += step;
+        renderSpread(currentLeftPage);
+      }
+    }
+
+    function prevSpread() {
+      if (!pdfDoc || isRendering) return;
+      const step = (window.innerWidth <= 900 || isSinglePageMode) ? 1 : 2;
+      if (currentLeftPage - step >= 1) {
+        currentLeftPage -= step;
+        renderSpread(currentLeftPage);
+      } else if (currentLeftPage > 1) {
+        currentLeftPage = 1;
+        renderSpread(currentLeftPage);
+      }
+    }
+
+    function goToPdfPage(targetPdfPage) {
+      if (!pdfDoc) return;
+      const isMobile = window.innerWidth <= 900 || isSinglePageMode;
+      currentLeftPage = isMobile ? targetPdfPage : (targetPdfPage % 2 === 0 ? targetPdfPage : targetPdfPage - 1);
+      if (currentLeftPage < 1) currentLeftPage = 1;
+      renderSpread(currentLeftPage);
+      document.getElementById('lector').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function zoom(delta) {
+      currentScale = Math.min(Math.max(currentScale + delta, 0.8), 3.0);
+      renderSpread(currentLeftPage);
+    }
+
+    function toggleViewMode() {
+      isSinglePageMode = !isSinglePageMode;
+      document.getElementById('view-mode-btn').innerText = isSinglePageMode ? '📖 Doble Página' : '📄 Página Simple';
+      renderSpread(currentLeftPage);
+    }
+
+    function toggleFullscreen() {
+      const elem = document.getElementById('reader-box');
+      if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch(err => alert(`Error de pantalla completa: ${err.message}`));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Atajos de Teclado
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSpread();
+      if (e.key === 'ArrowLeft') prevSpread();
+      if (e.key === '+' || e.key === '=') zoom(0.15);
+      if (e.key === '-' || e.key === '_') zoom(-0.15);
+    });
+
+    window.addEventListener('resize', () => {
+      renderSpread(currentLeftPage);
+    });
+  </script>
+</body>
+</html>
