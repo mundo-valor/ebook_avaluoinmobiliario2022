@@ -415,7 +415,7 @@
     /* Grilla de Capítulos / Índice */
     .fabulas-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 1.5rem;
     }
 
@@ -534,6 +534,7 @@
       margin: auto;
     }
 
+    /* Pliegue central de lomo */
     .book-spread.double-mode::after {
       content: "";
       position: absolute;
@@ -560,6 +561,7 @@
       align-items: center;
     }
 
+    /* Overlay de Carga */
     .reader-loader {
       position: absolute;
       inset: 0;
@@ -584,6 +586,7 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
+    /* Footer General */
     footer {
       border-top: 1px solid var(--border-card);
       padding: 3rem 0;
@@ -608,7 +611,7 @@
 </head>
 <body>
 
-  <!-- Encabezado -->
+  <!-- Encabezado con Logotipo Agrandado y Botón Donar -->
   <header>
     <div class="container nav-wrap">
       <a href="#" class="brand-logo">
@@ -626,7 +629,7 @@
       <nav class="nav-links">
         <a href="#obra">La Obra</a>
         <a href="#autor">El Autor</a>
-        <a href="#capitulos">Estructura & Capítulos</a>
+        <a href="#capitulos">Estructura de la Obra</a>
         <a href="#lector" class="btn btn-gold">📖 Leer Online</a>
         <a href="https://paypal.me/spilimcurso" target="_blank" rel="noopener noreferrer" class="btn btn-donate">
           ☕ Donar
@@ -726,91 +729,71 @@
       </div>
     </section>
 
-    <!-- Índice de Capítulos con Mapeo Exacto en PDF -->
+    <!-- Estructura de la Obra / Índice con Mapeo Exacto en PDF -->
     <section class="section-block" id="capitulos">
       <div class="container">
         <div class="section-head">
-          <h2>Estructura del Tratado</h2>
+          <h2>Estructura de la Obra</h2>
           <p>Selecciona una sección técnica para abrir directamente el libro interactivo en la página correspondiente.</p>
         </div>
 
         <div class="fabulas-grid">
-          <!-- Mapeo exacto PDF: Pág 1 impresa = Pág 10 PDF -->
-          <div class="fabula-card" onclick="goToPdfPage(10)">
+          <!-- Mapeo exacto PDF: Pág 1 impresa = Pág 21 del PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(21)">
             <div>
-              <div class="f-num">PARTE NORMATIVA • PÁG. 1</div>
-              <h4>Normas de Valuación & Medición</h4>
-              <p>Marco conceptual de las NIV / IVS, normas generales, normas de activos y la evolución metodológica panamericana.</p>
+              <div class="f-num">SECCIÓN I • PÁG. 1</div>
+              <h4>Normas Internacionales de Valuación</h4>
+              <p>Marco conceptual y estructura de las NIV / IVS: definiciones fundamentales, principios éticos, alcance de las investigaciones, bases de valor de mercado y los tres enfoques de valuación reconocidos universalmente.</p>
             </div>
             <div class="f-btn">Leer sección ➔</div>
           </div>
 
-          <!-- Mapeo exacto PDF: Pág 3 impresa = Pág 12 PDF -->
-          <div class="fabula-card" onclick="goToPdfPage(12)">
+          <!-- Mapeo exacto PDF: Pág 18 impresa = Pág 38 del PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(38)">
             <div>
-              <div class="f-num">ESTÁNDAR IVS • PÁG. 3</div>
-              <h4>NIV 101 a NIV 105</h4>
-              <p>Alcance del trabajo, investigaciones, bases de valor de mercado e implementación de los enfoques valuatorios.</p>
+              <div class="f-num">SECCIÓN II • PÁG. 18</div>
+              <h4>Norma Nacional de Valuación</h4>
+              <p>Directrices de la ABNT NBR 14653 (Partes 1 y 2): procedimientos generales para bienes urbanos, actividades básicas del perito, especificación de avalúos y tablas de encuadramiento en grados de fundamentación y precisión.</p>
             </div>
             <div class="f-btn">Leer sección ➔</div>
           </div>
 
-          <!-- Mapeo exacto PDF: Pág 18 impresa = Pág 27 PDF -->
-          <div class="fabula-card" onclick="goToPdfPage(27)">
+          <!-- Mapeo exacto PDF: Pág 33 impresa = Pág 53 del PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(53)">
             <div>
-              <div class="f-num">ESTÁNDAR ABNT • PÁG. 18</div>
-              <h4>NBR 14653 (Partes 1 y 2)</h4>
-              <p>Procedimientos generales, actividades básicas, especificidad en inmuebles urbanos y calificación de informes.</p>
+              <div class="f-num">SECCIÓN III • PÁG. 33</div>
+              <h4>Norma Internacional de Medición</h4>
+              <p>Estándares IPMS (NIMI) para edificios residenciales multifamiliares (IPMS 3A): reglas de delimitación física en propiedad horizontal, medición de áreas de uso privado, superficies comunes y muros compartidos.</p>
             </div>
             <div class="f-btn">Leer sección ➔</div>
           </div>
 
-          <!-- Mapeo exacto PDF: Pág 33 impresa = Pág 42 PDF -->
-          <div class="fabula-card" onclick="goToPdfPage(42)">
+          <!-- Mapeo exacto PDF: Pág 47 impresa = Pág 67 del PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(67)">
             <div>
-              <div class="f-num">MEDICIÓN IPMS • PÁG. 33</div>
-              <h4>Estándar IPMS: Residencial 3A</h4>
-              <p>Criterios de medición en unidades multifamiliares en condominio, áreas privadas y áreas comunes.</p>
+              <div class="f-num">SECCIÓN IV • PÁG. 47</div>
+              <h4>Desarrollo del informe de avalúo</h4>
+              <p>Estructura formal completa de un informe técnico: comunicación al cliente, resumen ejecutivo, certificaciones profesionales, información general, localización, aspectos legales, físicos y memoria del procedimiento.</p>
             </div>
             <div class="f-btn">Leer sección ➔</div>
           </div>
 
-          <!-- Mapeo exacto PDF: Pág 56 impresa = Pág 65 PDF -->
-          <div class="fabula-card" onclick="goToPdfPage(65)">
+          <!-- Mapeo exacto PDF: Pág 188 impresa = Pág 208 del PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(208)">
             <div>
-              <div class="f-num">INFORME MODELO • PÁG. 56</div>
-              <h4>Secciones A, B, C y D</h4>
-              <p>Estructuración formal del informe técnico: información general, localización, aspectos legales y físicos.</p>
+              <div class="f-num">SECCIÓN V • PÁG. 188</div>
+              <h4>Grado de Fundamentación y Precisión</h4>
+              <p>Cálculo y justificación de los grados alcanzados por el modelo de regresión lineal múltiple: análisis de varianza, significancia estadística, intervalos de confianza del 80% y calificación en Grado III.</p>
             </div>
             <div class="f-btn">Leer sección ➔</div>
           </div>
 
-          <!-- Mapeo exacto PDF: Pág 80 impresa = Pág 89 PDF -->
-          <div class="fabula-card" onclick="goToPdfPage(89)">
+          <!-- Mapeo exacto PDF: Pág 195 impresa = Pág 215 del PDF -->
+          <div class="fabula-card" onclick="goToPdfPage(215)">
             <div>
-              <div class="f-num">METODOLOGÍA • PÁG. 80</div>
-              <h4>Procedimiento del Avalúo</h4>
-              <p>Inspección técnica, recopilación de datos, diagnóstico de mercado y selección del método comparativo.</p>
-            </div>
-            <div class="f-btn">Leer sección ➔</div>
-          </div>
-
-          <!-- Mapeo exacto PDF: Pág 104 impresa = Pág 113 PDF -->
-          <div class="fabula-card" onclick="goToPdfPage(113)">
-            <div>
-              <div class="f-num">ECONOMETRÍA • PÁG. 104</div>
-              <h4>Tratamiento Científico & MRLM</h4>
-              <p>Modelado de precios hedónicos, verificación de supuestos de Gauss-Markov y análisis de especificación.</p>
-            </div>
-            <div class="f-btn">Leer sección ➔</div>
-          </div>
-
-          <!-- Mapeo exacto PDF: Pág 179 impresa = Pág 188 PDF -->
-          <div class="fabula-card" onclick="goToPdfPage(188)">
-            <div>
-              <div class="f-num">RESULTADOS • PÁG. 179</div>
-              <h4>Interpretación & Calificación</h4>
-              <p>Funciones de estimación, intervalos de confianza admisibles y encuadramiento en Grados III de Fundamentación y Precisión.</p>
+              <div class="f-num">SECCIÓN VI • PÁG. 195</div>
+              <h4>Anexos</h4>
+              <p>Soporte documental y técnico integral: plano arquitectónico del apartamento tipo, base de datos del mercado, salidas de procesamiento del software SisDEA, títulos legales y referencias bibliográficas.</p>
             </div>
             <div class="f-btn">Leer sección ➔</div>
           </div>
@@ -952,8 +935,8 @@
         isRendering = false;
         const rightPage = isMobile ? leftPage : Math.min(leftPage + 1, pdfDoc.numPages);
 
-        const displayLeft = leftPage > 9 ? `Pág. libro ${leftPage - 9}` : `Preliminar ${leftPage}`;
-        const displayRight = rightPage > 9 ? `Pág. libro ${rightPage - 9}` : `Preliminar ${rightPage}`;
+        const displayLeft = leftPage > 20 ? `Pág. libro ${leftPage - 20}` : `Preliminar ${leftPage}`;
+        const displayRight = rightPage > 20 ? `Pág. libro ${rightPage - 20}` : `Preliminar ${rightPage}`;
 
         document.getElementById('page-num-indicator').innerText = isMobile 
           ? `${displayLeft} (PDF: ${leftPage} / ${pdfDoc.numPages})` 
